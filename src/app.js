@@ -8,17 +8,6 @@ db.once("open", () => console.log("conexão com o banco feita com sucesso")); //
 
 const app = express();
 
-// let livros = [
-//   {
-//     id: 1,
-//     titulo: "Senhor dos Anéis",
-//   },
-//   {
-//     id: 2,
-//     titulo: "O Hobbit",
-//   },
-// ];
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
