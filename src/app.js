@@ -1,5 +1,6 @@
 import express from "express";
 import { db } from "./config/db.js";
+import { livros } from "./models/Livro.js";
 
 db.on("error", console.log.bind(console, "Erro de conexão")); //método que eu prevejo o que esta acontecendo, passo o error pois é o evento que quero pegar e tratar
 
@@ -7,16 +8,16 @@ db.once("open", () => console.log("conexão com o banco feita com sucesso")); //
 
 const app = express();
 
-let livros = [
-  {
-    id: 1,
-    titulo: "Senhor dos Anéis",
-  },
-  {
-    id: 2,
-    titulo: "O Hobbit",
-  },
-];
+// let livros = [
+//   {
+//     id: 1,
+//     titulo: "Senhor dos Anéis",
+//   },
+//   {
+//     id: 2,
+//     titulo: "O Hobbit",
+//   },
+// ];
 
 app.use(express.json());
 
@@ -24,7 +25,12 @@ app.get("/", (req, res) => {
   res.status(200).send("Curso de Node");
 });
 
-app.get("/livros", (req, res) => res.status(200).json(livros));
+app.get("/livros", (req, res) => {
+  //import livros da minha entidade Livros.js. como é algo do mongoose, ele me trás os métodos para eu trabalhar com busca. o find é um deles.
+  livros.find((err, livros) => {
+    res.status(200).json(livros);
+  });
+});
 
 app.get("/livros/:id", (req, res, next) => {
   try {
