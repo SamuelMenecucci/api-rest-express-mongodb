@@ -1,6 +1,5 @@
 import express from "express";
 import { db } from "./config/db.js";
-import { livros } from "./models/Livro.js";
 import routes from "./routes/index.js";
 
 db.on("error", console.log.bind(console, "Erro de conexão")); //método que eu prevejo o que esta acontecendo, passo o error pois é o evento que quero pegar e tratar
