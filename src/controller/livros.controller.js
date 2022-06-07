@@ -2,24 +2,31 @@ import { livros } from "../models/Livro.js";
 
 export class LivroController {
   static listarLivros = (req, res) => {
-    //import livros da minha entidade Livros.js. como é algo do mongoose, ele me trás os métodos para eu trabalhar com busca. o find é um deles.
-    livros.find((err, livros) => {
-      res.status(200).json(livros);
-    });
+    //importo livros da minha entidade Livros.js. como é algo do mongoose, ele me trás os métodos para eu trabalhar com busca. o find é um deles.
+    //para trazer os dados referentes ao id do author, eu utilizo o método populate, passando o campo que eu irei popular, e passo o exec para executar a função com os parâmetros de erro e de sucesso, tirando esses parâmetros do find, deixando o find vazio
+    livros
+      .find()
+      .populate("author")
+      .exec((err, livros) => {
+        res.status(200).json(livros);
+      });
   };
 
   static listarLivroPorId = (req, res) => {
     const { id } = req.params;
 
-    livros.findById(id, (err, livros) => {
-      if (err) {
-        res
-          .status(400)
-          .send({ message: `${err.message} - ID do livro não localizado.` });
-      } else {
-        res.status(200).send(livros);
-      }
-    });
+    livros
+      .findById(id)
+      .populate("author", "nome") //para que eu consiga especificar os campos que eu quero que venham de author, basta eu passar eles no segundo parâmetro
+      .exec((err, livros) => {
+        if (err) {
+          res
+            .status(400)
+            .send({ message: `${err.message} - ID do livro não localizado.` });
+        } else {
+          res.status(200).send(livros);
+        }
+      });
   };
 
   static cadastrarLivro = (req, res) => {
