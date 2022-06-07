@@ -72,4 +72,18 @@ export class LivroController {
       }
     });
   };
+
+  static listarLivroPorEditora = (req, res) => {
+    const { editora } = req.query;
+
+    //passando um filtro para o find
+    //passo primeiro o campo que eu quero buscar e segundo o valor que espero que ele tenha
+    livros.find({ editora: editora }, (err, livros) => {
+      if (err) {
+        res.status(400).send({ message: err.message });
+      } else {
+        res.status(200).send(livros);
+      }
+    });
+  };
 }

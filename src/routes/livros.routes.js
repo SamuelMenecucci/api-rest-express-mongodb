@@ -5,6 +5,8 @@ export const livroRouter = express.Router();
 
 livroRouter.get("/livros", LivroController.listarLivros);
 
+livroRouter.get("/livros/busca", LivroController.listarLivroPorEditora);
+
 livroRouter.get("/livros/:id", LivroController.listarLivroPorId);
 
 livroRouter.post("/livros", LivroController.cadastrarLivro);
