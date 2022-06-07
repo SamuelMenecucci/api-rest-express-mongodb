@@ -27,18 +27,6 @@ app.get("/livros/:id", (req, res, next) => {
   }
 });
 
-app.post("/livros", (req, res) => {
-  const livro = req.body;
-
-  const lastId = livros[livros.length - 1].id;
-
-  const novoLivro = { id: lastId + 1, titulo: livro.titulo };
-
-  livros.push(novoLivro);
-
-  res.status(200).send("Livro cadastrado com sucesso");
-});
-
 app.put("/livros/:id", (req, res, next) => {
   try {
     let { id } = req.params;
