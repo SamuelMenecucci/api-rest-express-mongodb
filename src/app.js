@@ -13,22 +13,6 @@ app.use(express.json());
 
 routes(app);
 
-app.delete("/livros/:id", (req, res, next) => {
-  try {
-    const { id } = req.params;
-
-    const index = buscarLivro(+id);
-
-    if (index === -1) throw new Error("Livro não encontrado");
-
-    livros.splice(index, 1);
-
-    res.status(200).send(`Livro ${id} removido com sucesso`);
-  } catch (err) {
-    next(err);
-  }
-});
-
 app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });

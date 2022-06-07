@@ -10,3 +10,5 @@ livroRouter.get("/livros/:id", LivroController.listarLivroPorId);
 livroRouter.post("/livros", LivroController.cadastrarLivro);
 
 livroRouter.put("/livros/:id", LivroController.atualizarLivro);
+
+livroRouter.delete("/livros/:id", LivroController.excluirLivro);

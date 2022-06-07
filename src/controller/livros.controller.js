@@ -53,4 +53,16 @@ export class LivroController {
       }
     });
   };
+
+  static excluirLivro = (req, res) => {
+    const { id } = req.params;
+
+    livros.findByIdAndDelete(id, (err) => {
+      if (!err) {
+        res.status(200).send({ message: "Livro removido com sucesso!" });
+      } else {
+        res.status(500).send({ message: err.message });
+      }
+    });
+  };
 }
