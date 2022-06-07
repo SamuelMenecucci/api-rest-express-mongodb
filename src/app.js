@@ -13,14 +13,4 @@ app.use(express.json());
 
 routes(app);
 
-app.use((err, req, res, next) => {
-  res.status(400).send(err.message);
-});
-
-function buscarLivro(id) {
-  const found = livros.findIndex((element) => element.id === id);
-
-  return found;
-}
-
 export default app;
