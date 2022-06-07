@@ -13,41 +13,6 @@ app.use(express.json());
 
 routes(app);
 
-app.get("/livros/:id", (req, res, next) => {
-  try {
-    let { id } = req.params;
-
-    const index = buscarLivro(+id);
-
-    if (index === -1) throw new Error("Livro não encontrado");
-
-    res.status(200).send(livros[index]);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.put("/livros/:id", (req, res, next) => {
-  try {
-    let { id } = req.params;
-    id = +id;
-
-    const index = buscarLivro(id);
-
-    if (index === -1) throw new Error("Livro não encontrado");
-
-    console.log(index);
-
-    livros[index].titulo = req.body.titulo;
-
-    console.log(livros);
-
-    res.status(200).send("Dados atualizados");
-  } catch (err) {
-    next(err);
-  }
-});
-
 app.delete("/livros/:id", (req, res, next) => {
   try {
     const { id } = req.params;
